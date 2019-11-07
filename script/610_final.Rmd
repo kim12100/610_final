@@ -59,7 +59,18 @@ output            : papaja::apa6_pdf
 
 ```{r setup, include = FALSE}
 library("papaja")
+library(tidyverse)
+library(rio)
+library(here)
+library(janitor)
+
 ```
+```{r data}
+data <- import(here("data","F00007762-WV6_Data_R_v20180912.rds"))
+head(data)
+
+```
+
 
 ```{r analysis-preferences}
 # Seed for random number generation
