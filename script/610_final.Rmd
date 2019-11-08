@@ -3,19 +3,25 @@ title             : "EDLD 610_final"
 shorttitle        : "Title"
 
 author: 
-  - name          : "First Author"
+  - name          : "Asha"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
     address       : "Postal address"
     email         : "my@email.com"
-  - name          : "Ernst-August Doelle"
-    affiliation   : "1,2"
+  - name          : "Joanna"
+    affiliation   : "1"
+    corresponding : no    # Define only one corresponding author
+    address       : "Postal address"
+    email         : "my@email.com"
+  - name          : "Thuy"
+    affiliation   : "1"
+    corresponding : no    # Define only one corresponding author
+    address       : "Postal address"
+    email         : "my@email.com"
 
 affiliation:
   - id            : "1"
-    institution   : "Wilhelm-Wundt-University"
-  - id            : "2"
-    institution   : "Konstanz Business School"
+    institution   : "University of Oregon"
 
 authornote: |
   Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
@@ -65,9 +71,34 @@ library(here)
 library(janitor)
 
 ```
-```{r data}
+
+```{r loading the data}
 data <- import(here("data","F00007762-WV6_Data_R_v20180912.rds"))
 head(data)
+```
+
+```{r selecting IV, creating objects for IV only}
+
+# I made two items for the happiness variable. One of them is ordinal (e.g. rather happy, very happy, etc): 
+
+happy <- data %>%
+characterize() %>%
+  select(V10)
+
+# And the other instead has the assigned numeric value. (Note that some of these values are negative, so one next step here is to do a transformation that allows us to have all positive values to use in analysis?)
+
+happy_numeric <- data %>%
+  select(V10)
+```
+
+```{r }
+
+```
+
+```{r exploring relationships between DV and IVs of interest}
+
+
+
 
 ```
 
