@@ -69,6 +69,7 @@ library(tidyverse)
 library(rio)
 library(here)
 library(janitor)
+library(dplyr)
 
 ```
 
@@ -91,7 +92,11 @@ happy_numeric <- data %>%
   select(V10)
 ```
 
-```{r }
+```{r creating objects for IV: religion}
+
+imp_life_rel <- data %>%
+  characterize() %>%
+    select(V9)
 
 ```
 
