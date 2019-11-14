@@ -86,12 +86,13 @@ data <- import(here("data","F00007762-WV6_Data_R_v20180912.rds")) %>%
 
 head(data)
 
+
 ```
 
 ```{r creating our data set}
 
 happy <- data %>%
-  select("V10", "V11", "V24", "V25", "V57", "V147", "V237", "V240") %>% 
+  select("v10", "v11", "v24", "v25", "v57", "v147", "v237", "v240") %>% 
   characterize()
 
 nrow(happy)
@@ -101,7 +102,6 @@ head(happy)
 
 
 ```{r exploring relationships between DV and IVs of interest}
-
 
 head(data)%>%
 colnames()
