@@ -138,7 +138,60 @@ data_subset %>%
   count(v11)
 
 ```
+```{r cleaning the data step 3: collapsing v24}
+unique(data_subset$v24)
 
+data_subset %>%
+  mutate(v24 = fct_recode(v24,
+                          "Most people can be trusted" = "Most people can be trusted",
+                          "Need to be very careful" = "Need to be very careful",
+                          "Other" = " DE,SE: Inapplicable;RU: Inappropiate response;SG:Missing;HT: Dropped out survey",
+                          "Other" = "Not asked in survey",
+                          "Other" = "Not applicable",
+                          "Other" = "No answer",
+                          "Other" = "Don´t know"))%>%
+  count(v24)
+
+
+```
+
+```{r cleaning the data step 4: collapsing v25}
+unique(data_subset$v25)
+
+data_subset %>%
+  mutate(v25 = fct_recode(v25,
+                        "Not a member" = "Not a member",
+                        "Inactive member" = "Inactive member",
+                        "Active member" = "Active member",
+                        "Other" = " HT: Dropped out survey;SE: Inapplicable;RU: Inappropriate response",
+                        "Other" = "Not asked in survey",
+                        "Other" = "Not applicable",
+                        "Other" = "No answer",
+                        "Other" = "Don't know")) %>%
+  count(v25)
+
+```
+
+```{r cleaning the data step 5: collapsing v57}
+unique(data_subset$v57)
+
+data_subset %>%
+  mutate(v57 = fct_recode(v57,
+                          "Married" = "Married",
+                          "Living together as married" = "Living together as married",
+                          "Divorced" = "Divorced",
+                          "Separated" = "Separated",
+                          "Widowed" = "Widowed",
+                          "Single" = "Single",
+                          "Other" = "HT: Dropped out survey;SG: Missing; RU: Inappropriate response",
+                          "Other" = "Not asked in survey",
+                          "Other" = "Not applicable",
+                          "Other" = "No answer",
+                          "Other" = "Don´t know"))%>%
+  count(v57)
+
+
+```
 
 
 # Methods
