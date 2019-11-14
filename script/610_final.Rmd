@@ -74,18 +74,21 @@ library(dplyr)
 ```
 
 ```{r loading the data}
+
 data <- import(here("data","F00007762-WV6_Data_R_v20180912.rds"))
-<<<<<<< Updated upstream
+
 data %>% 
 characterize()
 
-=======
-<<<<<<< Updated upstream
+data <- import(here("data","F00007762-WV6_Data_R_v20180912.rds")) %>%
+  janitor::clean_names() %>%
+  characterize()
+
 head(data)
->>>>>>> Stashed changes
+
 ```
 
-```{r selecting IV, creating objects for IV only}
+```{r creating our data set}
 
 happy <- data %>%
   select("V10", "V11", "V24", "V25", "V57", "V147", "V237", "V240") %>% 
@@ -96,32 +99,15 @@ nrow(happy)
 head(happy)
 ```
 
-```{r creating objects for IV: religion}
-
-imp_life_rel <- data %>%
-  characterize() %>%
-    select(V9)
-
-```
 
 ```{r exploring relationships between DV and IVs of interest}
 
 
-
-=======
 head(data)%>%
 colnames()
-  
->>>>>>> Stashed changes
 
 ```
 
-
-```{r analysis-preferences}
-# Seed for random number generation
-set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
-```
 
 
 
