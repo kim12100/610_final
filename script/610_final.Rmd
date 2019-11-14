@@ -75,21 +75,20 @@ library(dplyr)
 
 ```{r loading the data}
 data <- import(here("data","F00007762-WV6_Data_R_v20180912.rds"))
-head(data)
+data %>% 
+characterize()
+
 ```
 
 ```{r selecting IV, creating objects for IV only}
 
-# I made two items for the happiness variable. One of them is ordinal (e.g. rather happy, very happy, etc): 
-
 happy <- data %>%
-characterize() %>%
-  select(V10)
+  select("V10", "V11", "V24", "V25", "V57", "V147", "V237", "V240") %>% 
+  characterize()
 
-# And the other instead has the assigned numeric value. (Note that some of these values are negative, so one next step here is to do a transformation that allows us to have all positive values to use in analysis?)
+nrow(happy)
 
-happy_numeric <- data %>%
-  select(V10)
+head(happy)
 ```
 
 ```{r creating objects for IV: religion}
