@@ -75,9 +75,14 @@ library(dplyr)
 
 ```{r loading the data}
 data <- import(here("data","F00007762-WV6_Data_R_v20180912.rds"))
+<<<<<<< Updated upstream
 data %>% 
 characterize()
 
+=======
+<<<<<<< Updated upstream
+head(data)
+>>>>>>> Stashed changes
 ```
 
 ```{r selecting IV, creating objects for IV only}
@@ -103,6 +108,11 @@ imp_life_rel <- data %>%
 
 
 
+=======
+head(data)%>%
+colnames()
+  
+>>>>>>> Stashed changes
 
 ```
 
