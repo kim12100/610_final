@@ -91,23 +91,53 @@ head(data)
 
 ```{r creating our data set}
 
-happy <- data %>%
+data_subset <- data %>%
   select("v10", "v11", "v24", "v25", "v57", "v147", "v237", "v240") %>% 
   characterize()
 
-nrow(happy)
+nrow(data_subset)
 
-head(happy)
-```
-
-
-```{r exploring relationships between DV and IVs of interest}
-
-head(data)%>%
-colnames()
+head(data_subset)
 
 ```
 
+```{r cleaning the data step 1: collapsing v10 levels}
+
+# I used this to view the levels of v10. v10 is a character, not a factor, so need to use unique rather than levels function. I used this to get the exact spelling of the levels in order to collapse them. 
+
+unique(data_subset$v10)
+
+data_subset %>%
+  mutate(v10 = fct_recode(v10,
+                          "Very happy" = "Very happy",
+                          "Rather happy" = "Rather happy",
+                          "Not very happy" = "Not very happy",
+                          "Not at all happy" = "Not at all happy",
+                          "Other" = "No answer",
+                          "Other" = "Dont know", 
+                          "Other" = "HT: Missing-Dropped out survey; RU: Inappropriate response{Inappropriate}")) %>%
+  count(v10)
+
+
+```
+
+
+```{r cleaning the data step 2: collapsing v11 levels}
+
+unique(data_subset$v11)
+
+data_subset %>%
+  mutate(v11 = fct_recode(v11,
+                          "Very good" = "Very good",
+                          "Good" = "Good",
+                          "Faid" = "Fair",
+                          "Poor" = "Poor",
+                          "Other" = "No answer",
+                          "Other" = "Dont know", 
+                          "Other" = "BH:Missing;HT:Missing-Dropped out survey; RU:Inappropriate response{Inappropriate}")) %>%
+  count(v11)
+
+```
 
 
 
