@@ -190,6 +190,36 @@ data_subset %>%
                           "Other" = "Don´t know"))%>%
   count(v57)
 
+data_subset %>% 
+  mutate(v147 = fct_recode(v147, 
+                           "A religious person" = "A religious person",
+                           "Not a religious person" = "Not a religious person",
+                           "Not a religious person" = "An atheist",
+                           "Other" = "No answer",
+                           "Other" = "Dont know",
+                           "Other" = "Not asked in survey",
+                           "Other" = "DE,SE:Inapplicable ; RU:Inappropriate response; HT: Dropped out survey{Inappropriate}")) %>% 
+  count(v147)
+
+data_subset %>% 
+  mutate(v237 = fct_recode(v237,
+                            "Save money" = "Save money", 
+                            "Just get by" = "Just get by", 
+                            "Spent savings and borrowed money" = "Spent savings and borrowed money",
+                            "Spent some savings and borrowed money" = "Spent some savings and borrowed money",
+                            "Other" = "No answer",
+                            "Other" = "Dont know", 
+                            "Other" = "DE,SE:Inapplicable ; RU:Inappropriate response; BH: Missing; HT: Dropped out survey{Inappropriate}", 
+                            "Other" = "Not applicable"))
+
+data_subset %>% 
+  mutate(v240 = fct_recode(v240, 
+                           "Male" = "Male", 
+                           "Female" = "Female", 
+                           "Other" = "No answer", 
+                           "Other" = "Missing; Unknown"))
+
+
 
 ```
 
