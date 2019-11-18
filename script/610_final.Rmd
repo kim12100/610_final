@@ -75,108 +75,55 @@ library(dplyr)
 
 ```{r loading the data}
 
-data <- import(here("data","F00007762-WV6_Data_R_v20180912.rds"))
-
-data %>% 
-characterize()
-
 data <- import(here("data","F00007762-WV6_Data_R_v20180912.rds")) %>%
   janitor::clean_names() %>%
-  characterize()
-
-head(data)
-
-
-```
-
-```{r creating our data set}
-
-data_subset <- data %>%
   select("v10", "v11", "v24", "v25", "v57", "v147", "v237", "v240") %>% 
   characterize()
 
-nrow(data_subset)
-
-head(data_subset)
-
 ```
+
 
 ```{r cleaning the data step 1: collapsing v10 levels}
 
 # I used this to view the levels of v10. v10 is a character, not a factor, so need to use unique rather than levels function. I used this to get the exact spelling of the levels in order to collapse them. 
 
-unique(data_subset$v10)
+unique(data$v10)
 
-data_subset %>%
-  mutate(v10 = fct_recode(v10,
+data %>%
+  mutate(happy = fct_recode(v10,
                           "Very happy" = "Very happy",
                           "Rather happy" = "Rather happy",
                           "Not very happy" = "Not very happy",
                           "Not at all happy" = "Not at all happy",
                           "Other" = "No answer",
                           "Other" = "Dont know", 
-                          "Other" = "HT: Missing-Dropped out survey; RU: Inappropriate response{Inappropriate}")) %>%
-  count(v10)
-
-
-```
-
-
-```{r cleaning the data step 2: collapsing v11 levels}
-
-unique(data_subset$v11)
-
-data_subset %>%
-  mutate(v11 = fct_recode(v11,
-                          "Very good" = "Very good",
+                          "Other" = "HT: Missing-Dropped out survey; RU: Inappropriate response{Inappropriate}"),
+         health_condition = fct_recode(v11,
+         "Very good" = "Very good",
                           "Good" = "Good",
                           "Faid" = "Fair",
                           "Poor" = "Poor",
                           "Other" = "No answer",
                           "Other" = "Dont know", 
-                          "Other" = "BH:Missing;HT:Missing-Dropped out survey; RU:Inappropriate response{Inappropriate}")) %>%
-  count(v11)
-
-```
-```{r cleaning the data step 3: collapsing v24}
-unique(data_subset$v24)
-
-data_subset %>%
-  mutate(v24 = fct_recode(v24,
-                          "Most people can be trusted" = "Most people can be trusted",
+                          "Other" = "BH:Missing;HT:Missing-Dropped out survey; RU:Inappropriate response{Inappropriate}"),
+         trust = fct_recode(v24, 
+                           "Most people can be trusted" = "Most people can be trusted",
                           "Need to be very careful" = "Need to be very careful",
                           "Other" = " DE,SE: Inapplicable;RU: Inappropiate response;SG:Missing;HT: Dropped out survey",
                           "Other" = "Not asked in survey",
                           "Other" = "Not applicable",
                           "Other" = "No answer",
-                          "Other" = "Don´t know"))%>%
-  count(v24)
-
-
-```
-
-```{r cleaning the data step 4: collapsing v25}
-unique(data_subset$v25)
-
-data_subset %>%
-  mutate(v25 = fct_recode(v25,
-                        "Not a member" = "Not a member",
+                          "Other" = "Don´t know"),
+         church_membership = fct_recode(v25, 
+                          "Not a member" = "Not a member",
                         "Inactive member" = "Inactive member",
                         "Active member" = "Active member",
                         "Other" = " HT: Dropped out survey;SE: Inapplicable;RU: Inappropriate response",
                         "Other" = "Not asked in survey",
                         "Other" = "Not applicable",
                         "Other" = "No answer",
-                        "Other" = "Don't know")) %>%
-  count(v25)
-
-```
-
-```{r cleaning the data step 5: collapsing v57}
-unique(data_subset$v57)
-
-data_subset %>%
-  mutate(v57 = fct_recode(v57,
+                        "Other" = "Don't know"), 
+         marriage = fct_recode(v57, 
                           "Married" = "Married",
                           "Living together as married" = "Living together as married",
                           "Divorced" = "Divorced",
@@ -187,37 +134,35 @@ data_subset %>%
                           "Other" = "Not asked in survey",
                           "Other" = "Not applicable",
                           "Other" = "No answer",
-                          "Other" = "Don´t know"))%>%
-  count(v57)
-
-data_subset %>% 
-  mutate(v147 = fct_recode(v147, 
+                          "Other" = "Don´t know"),
+         relegion = fct_recode(v147, 
                            "A religious person" = "A religious person",
                            "Not a religious person" = "Not a religious person",
                            "Not a religious person" = "An atheist",
                            "Other" = "No answer",
                            "Other" = "Dont know",
                            "Other" = "Not asked in survey",
-                           "Other" = "DE,SE:Inapplicable ; RU:Inappropriate response; HT: Dropped out survey{Inappropriate}")) %>% 
-  count(v147)
-
-data_subset %>% 
-  mutate(v237 = fct_recode(v237,
-                            "Save money" = "Save money", 
+                           "Other" = "DE,SE:Inapplicable ; RU:Inappropriate response; HT: Dropped out survey{Inappropriate}"),
+         saving = fct_recode(v237, 
+                           "Save money" = "Save money", 
                             "Just get by" = "Just get by", 
                             "Spent savings and borrowed money" = "Spent savings and borrowed money",
                             "Spent some savings and borrowed money" = "Spent some savings and borrowed money",
                             "Other" = "No answer",
                             "Other" = "Dont know", 
                             "Other" = "DE,SE:Inapplicable ; RU:Inappropriate response; BH: Missing; HT: Dropped out survey{Inappropriate}", 
-                            "Other" = "Not applicable"))
-
-data_subset %>% 
-  mutate(v240 = fct_recode(v240, 
+                            "Other" = "Not applicable"),
+         gender = fct_recode(v240,
                            "Male" = "Male", 
                            "Female" = "Female", 
                            "Other" = "No answer", 
-                           "Other" = "Missing; Unknown"))
+                           "Other" = "Missing; Unknown")
+         
+         )
+         
+
+
+```
 
 
 
