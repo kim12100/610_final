@@ -82,6 +82,28 @@ data <- import(here("data","F00007762-WV6_Data_R_v20180912.rds")) %>%
 
 ```
 
+```{r renaming variable names}
+
+data <- data %>%
+  as_tibble() %>%
+    rename(
+      feeling_of_happiness = v10, 
+      state_of_health = v11, 
+      most_people_trusted = v24,
+      member_religion = v25,
+      marital_status = v57,
+      religious_person = v147,
+      family_savings = v237,
+      gender = v240)
+
+```
+
+Filter()
+Pivot_wider() – you don’t need to use this, just demo that you can do it.
+ 
+Descriptive stats:
+Group_by()
+Summarize()
 
 ```{r cleaning the data step 1: collapsing v10 levels}
 
