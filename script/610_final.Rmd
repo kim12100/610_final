@@ -187,8 +187,20 @@ data %>%
 ```
 
 
+```{r converting feeling_of_happiness from character to numeric}
+
+# NOTE: higher value = more happy, lower value = less happy
+
+data %>%
+  mutate(feeling_of_happiness = fct_recode(feeling_of_happiness,
+                          "4" = "Very happy",
+                          "3" = "Rather happy",
+                          "2" = "Not very happy",
+                          "1" = "Not at all happy",
+                          "0" = "Other"))
 
 ```
+
 
 
 # Methods
