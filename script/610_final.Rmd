@@ -187,7 +187,7 @@ data %>%
 ```
 
 
-```{r converting feeling_of_happiness from character to numeric}
+```{r cleaning feeling_of_happiness variable by making it numeric and filtering out "other" values}
 
 # NOTE: higher value = more happy, lower value = less happy
 
@@ -197,10 +197,13 @@ data %>%
                           "3" = "Rather happy",
                           "2" = "Not very happy",
                           "1" = "Not at all happy",
-                          "0" = "Other"))
+                          "0" = "Other")) %>%
+    filter(feeling_of_happiness == "4" |
+           feeling_of_happiness == "3" |
+           feeling_of_happiness == "2" |
+           feeling_of_happiness == "1")
 
 ```
-
 
 
 # Methods
