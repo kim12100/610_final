@@ -98,12 +98,6 @@ data <- data %>%
 
 ```
 
-Filter()
-Pivot_wider() – you don’t need to use this, just demo that you can do it.
- 
-Descriptive stats:
-Group_by()
-Summarize()
 
 ```{r cleaning the data step 1: collapsing v10 levels}
 
@@ -112,7 +106,7 @@ Summarize()
 unique(data$v10)
 
 data %>%
-  mutate(happy = fct_recode(v10,
+  mutate(feeling_of_happiness = fct_recode(feeling_of_happiness,
                           "Very happy" = "Very happy",
                           "Rather happy" = "Rather happy",
                           "Not very happy" = "Not very happy",
@@ -120,7 +114,7 @@ data %>%
                           "Other" = "No answer",
                           "Other" = "Dont know", 
                           "Other" = "HT: Missing-Dropped out survey; RU: Inappropriate response{Inappropriate}"),
-         health_condition = fct_recode(v11,
+         state_of_health = fct_recode(state_of_health,
          "Very good" = "Very good",
                           "Good" = "Good",
                           "Faid" = "Fair",
@@ -128,7 +122,7 @@ data %>%
                           "Other" = "No answer",
                           "Other" = "Dont know", 
                           "Other" = "BH:Missing;HT:Missing-Dropped out survey; RU:Inappropriate response{Inappropriate}"),
-         trust = fct_recode(v24, 
+         most_people_trusted = fct_recode(most_people_trusted, 
                            "Most people can be trusted" = "Most people can be trusted",
                           "Need to be very careful" = "Need to be very careful",
                           "Other" = " DE,SE: Inapplicable;RU: Inappropiate response;SG:Missing;HT: Dropped out survey",
@@ -136,7 +130,7 @@ data %>%
                           "Other" = "Not applicable",
                           "Other" = "No answer",
                           "Other" = "Don´t know"),
-         church_membership = fct_recode(v25, 
+         member_religion = fct_recode(member_religion, 
                           "Not a member" = "Not a member",
                         "Inactive member" = "Inactive member",
                         "Active member" = "Active member",
@@ -145,7 +139,7 @@ data %>%
                         "Other" = "Not applicable",
                         "Other" = "No answer",
                         "Other" = "Don't know"), 
-         marriage = fct_recode(v57, 
+         marital_status = fct_recode(marital_status, 
                           "Married" = "Married",
                           "Living together as married" = "Living together as married",
                           "Divorced" = "Divorced",
@@ -157,7 +151,7 @@ data %>%
                           "Other" = "Not applicable",
                           "Other" = "No answer",
                           "Other" = "Don´t know"),
-         relegion = fct_recode(v147, 
+         religious_person = fct_recode(religious_person, 
                            "A religious person" = "A religious person",
                            "Not a religious person" = "Not a religious person",
                            "Not a religious person" = "An atheist",
@@ -165,7 +159,7 @@ data %>%
                            "Other" = "Dont know",
                            "Other" = "Not asked in survey",
                            "Other" = "DE,SE:Inapplicable ; RU:Inappropriate response; HT: Dropped out survey{Inappropriate}"),
-         saving = fct_recode(v237, 
+         family_savings = fct_recode(family_savings, 
                            "Save money" = "Save money", 
                             "Just get by" = "Just get by", 
                             "Spent savings and borrowed money" = "Spent savings and borrowed money",
@@ -174,7 +168,7 @@ data %>%
                             "Other" = "Dont know", 
                             "Other" = "DE,SE:Inapplicable ; RU:Inappropriate response; BH: Missing; HT: Dropped out survey{Inappropriate}", 
                             "Other" = "Not applicable"),
-         gender = fct_recode(v240,
+         gender = fct_recode(gender,
                            "Male" = "Male", 
                            "Female" = "Female", 
                            "Other" = "No answer", 
@@ -187,7 +181,7 @@ data %>%
 ```
 
 
-```{r cleaning feeling_of_happiness variable by making it numeric and filtering out "other" values}
+```{r cleaning feeling_of_happiness variable}
 
 # NOTE: higher value = more happy, lower value = less happy
 
@@ -202,6 +196,8 @@ data %>%
            feeling_of_happiness == "3" |
            feeling_of_happiness == "2" |
            feeling_of_happiness == "1")
+
+# Next step here: we need to figure out how to convert the happiness variable to an integer. Relabling didn't do this, it's still a factor. QUESTION: How do we convert this into an integer? When I try using as.numeric, it keeps coming up with an error message that the object feeling_of_happiness is not found and I don't understand why.  
 
 ```
 
