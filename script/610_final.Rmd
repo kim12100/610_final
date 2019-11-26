@@ -79,6 +79,8 @@ data <- import(here("data","F00007762-WV6_Data_R_v20180912.rds")) %>%
   janitor::clean_names() %>%
   select("v10", "v11", "v24", "v25", "v57", "v147", "v237", "v240") %>% 
   characterize()
+# 1.Strength: As you import data, you use select and characterize function which make dataset more tidy from the initial stage.(Woocheol Kim) 
+  
 
 ```
 
@@ -103,7 +105,10 @@ data <- data %>%
 
 # I used this to view the levels of v10. v10 is a character, not a factor, so need to use unique rather than levels function. I used this to get the exact spelling of the levels in order to collapse them. 
 
-unique(data$v10)
+unique(data$feeling_of_happiness)
+# 1. What I've learned: Great use of 'unique' function! I've had hard time finding the correct spelling of the levels and made typo most of the time. It should help me a lot in the future because I can just copy and paste when I recode or filter.(Woocheol Kim)
+
+# 1. You may improve: Since you already rename 'v10' to 'feeling_of_hapiness' in the previous chunk, I think it would work better if you use 'feeling_of_hapiness' instead of 'v10' in unique function. I also edit it. (Woocheol Kim)
 
 data %>%
   mutate(feeling_of_happiness = fct_recode(feeling_of_happiness,
@@ -175,7 +180,7 @@ data %>%
                            "Other" = "Missing; Unknown")
          
          )
-         
+# 2. Strength: Using fct_recode fuction, you reduce the number of observations in each column. It will facilitate you to show the difference between group more clearly and more distictively.(Woocheol Kim)
 
 
 ```
@@ -185,7 +190,7 @@ data %>%
 
 # NOTE: higher value = more happy, lower value = less happy
 
-data %>%
+data <- data %>% 
   mutate(feeling_of_happiness = fct_recode(feeling_of_happiness,
                           "4" = "Very happy",
                           "3" = "Rather happy",
@@ -195,9 +200,19 @@ data %>%
     filter(feeling_of_happiness == "4" |
            feeling_of_happiness == "3" |
            feeling_of_happiness == "2" |
-           feeling_of_happiness == "1")
+           feeling_of_happiness == "1") 
+
+# I edit 'data %>%' to 'data <- data %>%' so you save and see the updated data.(Woocheol Kim)  
+
 
 # Next step here: we need to figure out how to convert the happiness variable to an integer. Relabling didn't do this, it's still a factor. QUESTION: How do we convert this into an integer? When I try using as.numeric, it keeps coming up with an error message that the object feeling_of_happiness is not found and I don't understand why.  
+
+# 2. You may improve: The below code is my answer for the above question about converting 'feeling_of_happiness' to integer. It seems there is a specific condition you can use as.numeric function without error.(Woocheol Kim)
+
+# converting factor to numeric: data <- data %>% transform(data, feeling_of_happiness=as.numeric(as.character(feeling_of_happiness)))(Woocheol Kim)
+  
+# 3. Strength: The step-by-step work you've done is easy for reviewers like me to understand how you have developed your project so far. I've never lost as I review your work. Well done and good work!(Woocheol Kim)
+
 
 ```
 
